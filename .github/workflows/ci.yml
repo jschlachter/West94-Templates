@@ -34,7 +34,10 @@ jobs:
     - name: Display .NET Core Version
       run: dotnet --version
 
+    - name: Install Dependencies
+      run: dotnet restore
+
     - name: Build Template Package
-      run: dotnet build -c Release 
+      run: dotnet build --configuration Release --no-restore 
 
     
