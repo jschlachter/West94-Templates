@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Jeremy Schlachter",
+    "classifications": [ "West94", "Console" ],
+    "name": "West94 Console with Spectre",
+    "tags": {
+        "language": "C#",
+        "type": "project"
+    },
+    "identity": "West94.ConsoleWithSpectre",
+    "groupIdentity": "West94.ConsoleWithSpectre",
+    "shortname": "w94spectre",
+    "sourceName": "ConsoleWithSpectre",
+    "preferNameDirectory": true,
+    "primaryOutputs": [ { "path": "ConsoleWithSpectre.csproj" } ]
+
+}

@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Authors>Jeremy Schlachter</Authors>
+    <PackageType>Template</PackageType>
+    <PackageTags>dotnet-new;templates;west94</PackageTags>
+    <AssemblyName>West94.Templates</AssemblyName>
+    <Title>West94 templates for the .NET SDK.</Title>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <NoWarn>$(NoWarn)</NoWarn>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+    <PackageProjectUrl>https://github.com/jschlachter/West94-Templates</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="docs\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ProjectTemplates\**\*" Exclude="ProjectTemplates\**\bin\**;templates\**\obj\**;ProjectTemplates\**\logs\**" />
+    <Compile Remove="**\*" />
+    <!-- <None Include="../devlead.png" Pack="true" PackagePath=""/> -->
+  </ItemGroup>
+
+  <Target Name="VersionBuild" BeforeTargets="PrepareForBuild" Condition="'$(TemplateVersion)'!=''">
+    <XmlPoke XmlInputPath="ProjectTemplates\**\*.csproj" Query="Project/ItemGroup/PackageReference/@Version" Value="$(TemplateVersion)" />
+  </Target>
+
+ <PropertyGroup>
+    <LocalizeTemplates>false</LocalizeTemplates>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.TemplateEngine.Tasks" Version="*" PrivateAssets="all" IsImplicitlyDefined="true"/>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,43 @@
+name: "CI"
+
+on:
+  push:
+    branches:
+    - main
+    - hotfix/**
+    - features/**
+    tags:
+    - '*.*.*'
+  pull_request:
+
+env:
+  DOTNET_NOLOGO: true
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        runs-on: [ ubuntu-latest ]
+    name: ${{ matrix.runs-on }}
+    runs-on: ${{ matrix.runs-on }}
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
+    - name: Install .NET Core SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        global-json-file: global.json
+    
+    - name: Display .NET Core Version
+      run: dotnet --version
+
+    - name: Install Dependencies
+      run: dotnet restore
+
+    - name: Build Template Package
+      run: dotnet build --configuration Release --no-restore 
+
+    
